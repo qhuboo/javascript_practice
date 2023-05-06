@@ -51,6 +51,35 @@ console.log(evenDivs[0].parentElement.lastElementChild);
 const testDiv = document.querySelector(".test");
 console.log(testDiv);
 console.log(testDiv.lastChild);
-console.log(testDiv.lastElementChild);
+console.log(testDiv.lastElementChild); // This should be the span element
 console.log(evenDivs[0].nextSibling);
 console.log(evenDivs[0].nextElementSibling);
+
+// Moving on to removing all the nodes in parent element
+view1.style.display = "none";
+view2.style.display = "flex";
+view2.style.flexDirection = "row";
+view2.style.flexWrap = "wrap";
+view2.style.margin = "10px";
+
+// This removes all nodes inside the view2 section not just elements
+while (view2.lastChild) {
+  view2.lastChild.remove();
+}
+
+const createDivs = (parent, iter) => {
+  const newDiv = document.createElement("div");
+  newDiv.textContent = iter;
+  newDiv.style.backgroundColor = "black";
+  newDiv.style.width = "100px";
+  newDiv.style.height = "100px";
+  newDiv.style.margin = "10px";
+  newDiv.style.display = "flex";
+  newDiv.style.justifyContent = "center";
+  newDiv.style.alignItems = "center";
+  parent.append(newDiv);
+};
+
+for (let i = 0; i <= 12; i++) {
+  createDivs(view2, i);
+}
