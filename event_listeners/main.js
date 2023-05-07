@@ -34,25 +34,22 @@ const initApp = () => {
   view.addEventListener(
     "click",
     (event) => {
-      view.style.backgroundColor = "purple";
-      console.log("The view element was triggered");
+      event.target.style.backgroundColor = "purple";
     },
-    true
+    false
   );
   div.addEventListener(
     "click",
     (event) => {
-      div.style.backgroundColor = "blue";
-      console.log("The div element was triggered");
+      event.target.style.backgroundColor = "blue";
     },
-    true
+    false
   );
   h2.addEventListener(
     "click",
     (event) => {
-      h2.textContent = "Clicked!";
-      console.log("The h2 Element was triggered");
+      event.target.textContent = "Clicked!";
     },
-    true
+    false
   );
 };
