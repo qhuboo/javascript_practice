@@ -34,13 +34,16 @@ const initApp = () => {
   view.addEventListener(
     "click",
     (event) => {
+      // view.style.backgroundColor = "purple";
       event.target.style.backgroundColor = "purple";
+      console.log(event.target);
     },
-    false
+    true
   );
   div.addEventListener(
     "click",
     (event) => {
+      // div.style.backgroundColor = "blue";
       event.target.style.backgroundColor = "blue";
     },
     false
@@ -48,6 +51,7 @@ const initApp = () => {
   h2.addEventListener(
     "click",
     (event) => {
+      // h2.textContent = "Clicked!";
       event.target.textContent = "Clicked!";
     },
     false
