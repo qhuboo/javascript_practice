@@ -102,3 +102,20 @@ console.log(joinString); // This prints out "Fire,Air,Water"
 // Since the string joinString contains a comma between each element we can use this as the separator as shown below
 const newElements = joinString.split(",");
 console.log(newElements); // This prints out an array: ["Fire", "Air", "Water"]
+
+// The concat method
+// The concat method is used to merge two or more arrays. This method does not change the existing arrays, but instead returns a new array
+// Concat method syntax: concat(value0, value1, ..., valueN) where the values can be either arrays or regular values. If the values parameters are
+// omitted concat returns a shallow copy of the existing array on which it is called.
+const myArrayA = ["A", "B", "C"];
+const myArrayB = ["D", "E", "F"];
+const myArrayAB = myArrayA.concat(myArrayB);
+console.log(myArrayAB); // This prints out [ 'A', 'B', 'C', 'D', 'E', 'F' ]
+
+// Another way to concatenate two or more arrays is to use the spread operator
+// The spread operator (...) syntax allows an iterable, such as an array or string, to be expanded in places where zero or more arguments or elements are expected.
+// For example lets concatenate our previous myArrayA and myArrayB
+const spreadArrayAB = [...myArrayA, ...myArrayB];
+console.log("Using the spread operator:");
+console.log(spreadArrayAB); // This prints out [ 'A', 'B', 'C', 'D', 'E', 'F' ]
+// If we don't use the spread operator and instead do spreadArrayAB = [myArrayA, myArrayB] we get a new array with nested arrays as the two elements
