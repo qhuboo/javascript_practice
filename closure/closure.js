@@ -57,28 +57,122 @@
 // 4. Write a function once that accepts a callback as input and returns a function. When the returned function is called the first the first time,
 // it should call the callback and return that output. If it is called any additional times, instead of calling the callback again it will simply return the
 // output value from the first time it was called.
-function createOnceFunction(callback) {
-  let counter = 0;
-  let first = 0;
-  function once(input) {
-    if (counter == 0) {
-      first = callback(input);
-      console.log(`Run ${counter + 1}`, first);
-      counter++;
-      return first;
-    } else {
-      console.log(`Run ${counter + 1}`, first);
-      counter++;
-      return first;
-    }
-  }
-  return once;
-}
+// function createOnceFunction(callback) {
+//   let counter = 0;
+//   let first = 0;
+//   function once(input) {
+//     if (counter == 0) {
+//       first = callback(input);
+//       console.log(`Run ${counter + 1}`, first);
+//       counter++;
+//       return first;
+//     } else {
+//       console.log(`Run ${counter + 1}`, first);
+//       counter++;
+//       return first;
+//     }
+//   }
+//   return once;
+// }
 
-const onceFunction = createOnceFunction((input) => input * 2);
-onceFunction(25);
-onceFunction(3);
-onceFunction(23);
+// const onceFunction = createOnceFunction((input) => input * 2);
+// onceFunction(25);
+// onceFunction(3);
+// onceFunction(23);
 
 // 5. Write a function *after* that takes the number of times the callback needs to be called before being executed as the first parameter
 // and the callback as the second parameter.
+
+// function after(number, callback) {
+//   let counter = 0;
+//   function runAfter() {
+//     if (counter == number) {
+//       callback();
+//     } else {
+//       console.log("I can't run the function at this time");
+//       counter++;
+//     }
+//   }
+//   return runAfter;
+// }
+
+// const myFunction = after(3, () => console.log("I ran!"));
+// myFunction();
+// myFunction();
+// myFunction();
+// myFunction();
+
+// 6. Write a function *delay* that accepts a callback as the first parameter and the wait in milliseconds before allowing the callback to be
+// invoked as the second parameter. Any additional arguments after wait are provided to func when it is invoked. HINT: research setTimeout();
+// function delay(callback, delay, number) {
+//   setTimeout(() => callback(number), delay);
+// }
+
+// delay((number) => console.log(number * 2), 3000, 3);
+
+// 7. Write a function *rollCall* that accepts an array of names and returns a function. The first time the returned function is invoked,
+// it should log the first name to the console. The second time it is invoked, it should log the second name to the console, and so on, until all names
+// have been called. Once all names have been called, it shouldl log "Everyone accounted for."
+// function rollCall(nameArray) {
+//   let counter = 0;
+//   function func() {
+//     if (counter != nameArray.length) {
+//       console.log(nameArray[counter]);
+//       counter++;
+//     } else {
+//       console.log("Everyone accounted for");
+//     }
+//   }
+//   return func;
+// }
+
+// const myRollCall = rollCall(["Jose", "Alan", "Misael"]);
+// myRollCall();
+// myRollCall();
+// myRollCall();
+// myRollCall();
+
+// 8. Create a function *saveOutput* that accepts a function (that will accept one argument), and a string (that will act as a password).
+// saveOutput will then return a function that behaves exactly like the passed-in function, except for when the password string is passed as the argument.
+// When this happens, the returned function will return an object with all previously passed-in arguments as keys, and the corresponding outputs as values.
+// function saveOutput(callback, password) {
+//   let inputDb = {};
+//   function func(input) {
+//     if (input != password) {
+//       result = callback(input);
+//       let propertyName = input;
+//       inputDb[propertyName] = result;
+//       return result;
+//     } else {
+//       return inputDb;
+//     }
+//   }
+//   return func;
+// }
+
+// const newFunction = saveOutput((input) => input * 2, "jose");
+// console.log(newFunction(1));
+// console.log(newFunction(2));
+// console.log(newFunction(3));
+// console.log(newFunction(4));
+// console.log(newFunction("jose"));
+
+// 9. Create a function *cycleIterator* that accepts an array, and returns a function. The returned function will accept zero arguments. When first invoked,
+// the returned function will return the first element of the array. When invoked a second time, the returned function will return the second element of
+// the array, and so forth. After returning the last element of the array, the next invocation will return the first element of the array again, and
+// continue on with the second after that, and so forth.
+function cycleIterator(array) {
+  let counter = 0;
+  function func() {
+    counter++;
+    return array[(counter - 1) % array.length];
+  }
+  return func;
+}
+const myFunction = cycleIterator([1, 2, 3]);
+console.log(myFunction());
+console.log(myFunction());
+console.log(myFunction());
+console.log(myFunction());
+console.log(myFunction());
+console.log(myFunction());
