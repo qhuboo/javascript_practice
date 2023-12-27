@@ -161,18 +161,41 @@
 // the returned function will return the first element of the array. When invoked a second time, the returned function will return the second element of
 // the array, and so forth. After returning the last element of the array, the next invocation will return the first element of the array again, and
 // continue on with the second after that, and so forth.
-function cycleIterator(array) {
-  let counter = 0;
+// function cycleIterator(array) {
+//   let counter = 0;
+//   function func() {
+//     counter++;
+//     return array[(counter - 1) % array.length];
+//   }
+//   return func;
+// }
+// const myFunction = cycleIterator([1, 2, 3]);
+// console.log(myFunction());
+// console.log(myFunction());
+// console.log(myFunction());
+// console.log(myFunction());
+// console.log(myFunction());
+// console.log(myFunction());
+
+// 10. Create a function *defineFirstArg* that accepts a function and an argument. Also, the function being passed in will accept at least one argument.
+// *defineFirstArg* will return a new function that invokes the passed-in function with the passed-in argument as the passed-in functions first argument.
+// Additional arguments needed by the passed-in function will need to be passed into the returned function.
+// function defineFirstArg(passedInFunc, passedInParam) {
+//   function func() {
+//     return passedInFunc(passedInParam);
+//   }
+//   return func;
+// }
+// const double = defineFirstArg((input) => {
+//   return input * 2;
+// }, 12);
+// console.log(double());
+
+// 11. Create a function *dateStamp* that accepts a function and returns a function. The returned function will accept however many arguments the passed-in
+// function accepts, and return an object with a *date* key that contains a timestamp with the time of invocation, and an *output* key that contains the
+// result from invoking the passed-in function. HINT: You may need to research how to access information on Date objects
+function dateStamp(callback) {
   function func() {
-    counter++;
-    return array[(counter - 1) % array.length];
+    return callback();
   }
-  return func;
 }
-const myFunction = cycleIterator([1, 2, 3]);
-console.log(myFunction());
-console.log(myFunction());
-console.log(myFunction());
-console.log(myFunction());
-console.log(myFunction());
-console.log(myFunction());
