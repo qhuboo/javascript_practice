@@ -383,29 +383,82 @@
 // However, if the string 'undo' is passed into the function, then the function should delete the last action saved in the history, and return that deleted
 // string with the wored 'undone' after (separated by a space). If 'undo' is passed into the function and the function's history is empty, then the
 // function should return a string 'nothing to do'
-function makeHistory(number) {
-  const stringHistory = [];
-  return function (string) {
-    if (stringHistory.length == 0 && string == "undo") {
-      return "nothing to do";
-    } else if (string && string != "undo") {
-      stringHistory.push(string);
-      return string + " done";
-    } else {
-      let last = stringHistory[stringHistory.length - 1];
-      stringHistory.pop();
-      return last + " undone";
-    }
+// function makeHistory(number) {
+//   const stringHistory = [];
+//   return function (string) {
+//     if (stringHistory.length == 0 && string == "undo") {
+//       return "nothing to do";
+//     } else if (string && string != "undo") {
+//       stringHistory.push(string);
+//       return string + " done";
+//     } else {
+//       let last = stringHistory[stringHistory.length - 1];
+//       stringHistory.pop();
+//       return last + " undone";
+//     }
+//   };
+// }
+
+// const stringFunction = makeHistory(3);
+// console.log(stringFunction("undo"));
+// console.log(stringFunction("First"));
+// console.log(stringFunction("undo"));
+// console.log(stringFunction("undo"));
+// console.log(stringFunction("Second"));
+// console.log(stringFunction("Third"));
+// console.log(stringFunction("undo"));
+// console.log(stringFunction("undo"));
+// console.log(stringFunction("undo"));
+
+// 19. Inspect the commented out test cases carefully if you need help to understand these intructions.
+// Create a funciton *blackjack* that accepts an array (which will contain numbers ranging from 1 through 11), and returns a DEALER function.
+// The DEALER function will take two arguments (both numbers), and then return yet ANOTHER function, which we will call the PLAYER function.
+// On the FIRST invocation of the PLAYER function, it will return the sum of the two numbers passed to the DEALER function.
+// On the SECOND invocation of the PLAYER function, it will return either:
+// 1. The first number in the array that was passed into the *blackjack* PLUS the sume of the two numbers passed in as arguments into the DEALER function,
+// IF that sum is 21 or below, OR
+// 2. The string 'bust' if that sum is over 21.
+// If it is 'bust', then every invocation of the PLAYER function AFTER THAT will return the string 'you are done!'(but unlike 'bust', the 'you are done!' output
+// will NOT use a number in the array). If it is NOT 'bust', then the next invocation of the PLAYER function will return either:
+// 1. The most recent sum plus the next number in the array(a new sum) if that sum is 21 or less, OR
+// 2. The string 'bust' if the new sum is over 21.
+// And again, if it is 'bust', then every subsequent invocation of the PLAYER function will return the string 'you are done!'. Otherwise, it can continue
+// on to give the next sume with the next number in the array, and so forth.
+// You may assume that the given array is long enough to give a 'bust' before running out of numbers.
+// BONUS: Implement *blackjack* so the DEALER function can return more PLAYER functions that will each continue to take the next number in the array
+// after the previous PLAYER function left off. You will just need to make sure the array has enough numbers for all the PLAYER functions.
+function blackjack(array) {
+  let playerCounter = 0;
+  return function DEALER(numberOne, numberTwo) {
+    let isBust = false;
+    let currentSum = numberOne + numberTwo;
+    return function PLAYER() {
+      if (playerCounter == 0) {
+        playerCounter++;
+        return currentSum;
+      } else {
+        if (!isBust) {
+          currentSum += array[playerCounter - 1];
+          playerCounter++;
+          if (currentSum <= 21) {
+            return currentSum;
+          } else {
+            isBust = true;
+            return "bust";
+          }
+        } else {
+          return "You are done!";
+        }
+      }
+    };
   };
 }
-
-const stringFunction = makeHistory(3);
-console.log(stringFunction("undo"));
-console.log(stringFunction("First"));
-console.log(stringFunction("undo"));
-console.log(stringFunction("undo"));
-console.log(stringFunction("Second"));
-console.log(stringFunction("Third"));
-console.log(stringFunction("undo"));
-console.log(stringFunction("undo"));
-console.log(stringFunction("undo"));
+const dealerFunction = blackjack([1, 4, 2, 8, 5, 3, 9]);
+const playerFunction = dealerFunction(1, 1);
+console.log(playerFunction());
+console.log(playerFunction());
+console.log(playerFunction());
+console.log(playerFunction());
+console.log(playerFunction());
+console.log(playerFunction());
+console.log(playerFunction());
