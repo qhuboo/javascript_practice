@@ -194,8 +194,218 @@
 // 11. Create a function *dateStamp* that accepts a function and returns a function. The returned function will accept however many arguments the passed-in
 // function accepts, and return an object with a *date* key that contains a timestamp with the time of invocation, and an *output* key that contains the
 // result from invoking the passed-in function. HINT: You may need to research how to access information on Date objects
-function dateStamp(callback) {
-  function func() {
-    return callback();
-  }
+// function dateStamp(callback) {
+//   let inputDb = {};
+//   function func(input) {
+//     const result = callback(input);
+//     const now = new Date();
+//     inputDb[now] = result;
+//     return inputDb;
+//   }
+//   return func;
+// }
+
+// const newFunction = dateStamp((input) => input * 2);
+// setTimeout(() => console.log(newFunction(4)), 1000);
+// setTimeout(() => console.log(newFunction(2)), 2000);
+// setTimeout(() => console.log(newFunction(98)), 3000);
+// setTimeout(() => console.log(newFunction(74)), 4000);
+// I used setTimeout because if I run the functions they execute at nominally at the same time so each result replaces the other.
+
+// 12. Create a function *censor* that accepts no arguments. *censor* will return a function that will accept either two strings, or one string. When two strings
+// are given, the returned function will hold onto the strings as a pair, for future use. When on string is given, the returned function will return the same
+// string, except all instances of first strings(of saved pairs) will be replaced with their corresponding second strings(of those saved pairs).
+// function censor() {
+//   let strings = {};
+//   function func(firstString, secondString) {
+//     if (firstString && secondString) {
+//       strings[firstString] = secondString;
+//     } else if (firstString) {
+//       let words = firstString.split(/\s+/);
+//       let censored = words.map((word) => {
+//         if (strings[word]) {
+//           return strings[word];
+//         }
+//         return word;
+//       });
+//       return censored.join(" ");
+//     } else {
+//       console.log("Please provided either one string or two");
+//     }
+//   }
+//   return func;
+// }
+
+// const myFunction = censor();
+// myFunction("Jose", "Cucas");
+// myFunction("Alan", "Becho");
+// myFunction("Misael", "Michi");
+// console.log(myFunction("I miss the homie Misael"));
+
+// 13. There's no such thing as private properties on a Javascript object! But, maybe there are? Implement a function createSecretHolder(secret)
+// which acccepts any value as a secret and returns an object with ONLY two methods. getSecret() which returns the secret and setSecret() which sets the secret
+// function createSecretHolder(secret) {
+//   let secretObject = {
+//     secret: secret,
+//     getSecret: function getSecret() {
+//       return this.secret;
+//     },
+//     setSecret: function setSecret(newSecret) {
+//       this.secret = newSecret;
+//     },
+//   };
+//   return secretObject;
+// }
+
+// let someSecret = createSecretHolder("Jose");
+// console.log(someSecret.getSecret());
+// someSecret.setSecret("Alan");
+// console.log(someSecret.secret);
+// Although this implementation works it misses the point of the exercise which is to keep the secret property private and inaccessible from the
+// object itself. We want this secret property to be captured by the closure of the function createSecretHolder. Here is a correct implementation
+// function createSecretHolder(secret) {
+//   return {
+//     getSecret: function () {
+//       return secret;
+//     },
+//     setSecret: function (newSecret) {
+//       secret = newSecret;
+//     },
+//   };
+// }
+
+// const someOtherSecret = createSecretHolder("Misael");
+// console.log(someOtherSecret.getSecret());
+// someOtherSecret.setSecret("Alan");
+// console.log(someOtherSecret.getSecret());
+// In this implementation, unlike our first attempt, we don't have access to the secret property directly. We cannot retrieve the secret using the usual
+// someOtherSecret.secret. The property is rendered private and can only be accessed through the method getSecret() and set through the setSecret() method.
+
+// 14. Write a function, *callTimes*, that returns a function. The new function should return the number of times it's been called.
+// function callTimes() {
+//   let counter = 0;
+//   function func() {
+//     counter++;
+//     return counter;
+//   }
+//   return func;
+// }
+
+// const myFunction = callTimes();
+// myFunction();
+// myFunction();
+// myFunction();
+// myFunction();
+// myFunction();
+// console.log(myFunction());
+
+// 15. Create a function *roulette* that accepts a number (let us call it n), and returns a function. The returned function will take no arguments,
+// and will return the string 'spin' the first *n-1* number of times it is invoked. On the very next invocation (the nth invocation), the returned
+// function will the string 'win'. On every invocation after that, the returned function returns the string 'pick a number to play again'
+// function roulette(number) {
+//   let i = 0;
+//   return function () {
+//     i++;
+//     if (i <= number - 1) {
+//       return "spin";
+//     } else if (i == number) {
+//       return "win";
+//     } else {
+//       return "pick a number to play again";
+//     }
+//   };
+// }
+
+// const letsPlay = roulette(3);
+// console.log(letsPlay());
+// console.log(letsPlay());
+// console.log(letsPlay());
+// console.log(letsPlay());
+// console.log(letsPlay());
+// console.log(letsPlay());
+// console.log(letsPlay());
+// console.log(letsPlay());
+
+// 16. Create a function *average* that accepts no arguments, and returns a function(that wil accept either a number as its lone argument, or no arguments at all).
+// When the returned function is invoked with a number, the output should be the average of all the numbers that have been passed into that function(duplicate
+// numbers count just like any other number). When the returned function is invoked with no arguments, the current average is outputted. If the returned function
+// is invoked with no arguments before any numbers are passed in, then it should return 0.
+// function average() {
+//   const numbers = [];
+//   let sum = 0;
+//   return function (number) {
+//     if (numbers.length == 0 && !number) {
+//       return 0;
+//     } else if (number) {
+//       numbers.push(number);
+//       sum += number;
+//       return sum / numbers.length;
+//     } else {
+//       return sum / numbers.length;
+//     }
+//   };
+// }
+
+// const myAverageFunction = average();
+// console.log(myAverageFunction());
+// console.log(myAverageFunction(2));
+// console.log(myAverageFunction(3));
+// console.log(myAverageFunction());
+// console.log(myAverageFunction(29));
+
+// 17. Create a function *makeFuncTester* that accepts an array (of two-element sub-arrays), and returns a function (that will accept a callback). The
+// returned function should return *true* if the first elements(of each sub-array) being passed into the callback all yields the corresponding second elements
+// (of the same sub-array). Otherwise, the returned function should return false.
+// function makeFuncTester(array) {
+//   return function (callback) {
+//     for (let i = 0; i < array[0].length - 1; i++) {
+//       if (
+//         callback(array[0][i]) != array[0][i + 1] &&
+//         callback(array[1][i]) != array[1][i + 1]
+//       ) {
+//         return false;
+//       }
+//       return true;
+//     }
+//   };
+// }
+
+// const checkDouble = makeFuncTester([
+//   [1, 2],
+//   [3, 6],
+// ]);
+
+// console.log(checkDouble((input) => input * 2));
+
+// 18. Create a function *makeHistory* that accepts a number (which will serve as a limit), and returns a function (that will accept a string).
+// The returned function will save a history of the most recent "limit" number of strings passed into the returned function (one per inovcation only).
+// Every time a string is passed into the function, the function should return that same string with the word 'done' after it(separated by a space).
+// However, if the string 'undo' is passed into the function, then the function should delete the last action saved in the history, and return that deleted
+// string with the wored 'undone' after (separated by a space). If 'undo' is passed into the function and the function's history is empty, then the
+// function should return a string 'nothing to do'
+function makeHistory(number) {
+  const stringHistory = [];
+  return function (string) {
+    if (stringHistory.length == 0 && string == "undo") {
+      return "nothing to do";
+    } else if (string && string != "undo") {
+      stringHistory.push(string);
+      return string + " done";
+    } else {
+      let last = stringHistory[stringHistory.length - 1];
+      stringHistory.pop();
+      return last + " undone";
+    }
+  };
 }
+
+const stringFunction = makeHistory(3);
+console.log(stringFunction("undo"));
+console.log(stringFunction("First"));
+console.log(stringFunction("undo"));
+console.log(stringFunction("undo"));
+console.log(stringFunction("Second"));
+console.log(stringFunction("Third"));
+console.log(stringFunction("undo"));
+console.log(stringFunction("undo"));
+console.log(stringFunction("undo"));
