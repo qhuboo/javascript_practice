@@ -476,7 +476,6 @@ function blackjack(array) {
         return currentSum;
       } else {
         if (!isBust) {
-          console.log("current number", array[arrayCounter]);
           currentSum += array[arrayCounter];
           playerCounter++;
           arrayCounter++;
