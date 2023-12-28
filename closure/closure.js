@@ -470,7 +470,7 @@ function blackjack(array) {
     let isBust = false;
     let playerCounter = 0;
     let currentSum = numberOne + numberTwo;
-    function PLAYER() {
+    return function PLAYER() {
       if (playerCounter == 0) {
         playerCounter++;
         return currentSum;
@@ -490,12 +490,7 @@ function blackjack(array) {
           return "You are done!";
         }
       }
-    }
-    if (!isBust) {
-      return PLAYER;
-    } else {
-      isBust = false;
-    }
+    };
   };
 }
 const dealerFunction = blackjack([1, 4, 2, 8, 5, 3, 9, 4, 2, 1, 8, 11]);
