@@ -425,21 +425,61 @@
 // And again, if it is 'bust', then every subsequent invocation of the PLAYER function will return the string 'you are done!'. Otherwise, it can continue
 // on to give the next sume with the next number in the array, and so forth.
 // You may assume that the given array is long enough to give a 'bust' before running out of numbers.
+
+// function blackjack(array) {
+//   let playerCounter = 0;
+//   return function DEALER(numberOne, numberTwo) {
+//     let isBust = false;
+//     let currentSum = numberOne + numberTwo;
+//     return function PLAYER() {
+//       if (playerCounter == 0) {
+//         playerCounter++;
+//         return currentSum;
+//       } else {
+//         if (!isBust) {
+//           currentSum += array[playerCounter - 1];
+//           playerCounter++;
+//           if (currentSum <= 21) {
+//             return currentSum;
+//           } else {
+//             isBust = true;
+//             return "bust";
+//           }
+//         } else {
+//           return "You are done!";
+//         }
+//       }
+//     };
+//   };
+// }
+// const dealerFunction = blackjack([1, 4, 2, 8, 5, 3, 9]);
+// const playerFunction = dealerFunction(1, 1);
+// console.log(playerFunction());
+// console.log(playerFunction());
+// console.log(playerFunction());
+// console.log(playerFunction());
+// console.log(playerFunction());
+// console.log(playerFunction());
+// console.log(playerFunction());
+
 // BONUS: Implement *blackjack* so the DEALER function can return more PLAYER functions that will each continue to take the next number in the array
 // after the previous PLAYER function left off. You will just need to make sure the array has enough numbers for all the PLAYER functions.
 function blackjack(array) {
-  let playerCounter = 0;
+  let arrayCounter = 0;
   return function DEALER(numberOne, numberTwo) {
     let isBust = false;
+    let playerCounter = 0;
     let currentSum = numberOne + numberTwo;
-    return function PLAYER() {
+    function PLAYER() {
       if (playerCounter == 0) {
         playerCounter++;
         return currentSum;
       } else {
         if (!isBust) {
-          currentSum += array[playerCounter - 1];
+          console.log("current number", array[arrayCounter]);
+          currentSum += array[arrayCounter];
           playerCounter++;
+          arrayCounter++;
           if (currentSum <= 21) {
             return currentSum;
           } else {
@@ -450,15 +490,36 @@ function blackjack(array) {
           return "You are done!";
         }
       }
-    };
+    }
+    if (!isBust) {
+      return PLAYER;
+    } else {
+      isBust = false;
+    }
   };
 }
-const dealerFunction = blackjack([1, 4, 2, 8, 5, 3, 9]);
-const playerFunction = dealerFunction(1, 1);
-console.log(playerFunction());
-console.log(playerFunction());
-console.log(playerFunction());
-console.log(playerFunction());
-console.log(playerFunction());
-console.log(playerFunction());
-console.log(playerFunction());
+const dealerFunction = blackjack([1, 4, 2, 8, 5, 3, 9, 4, 2, 1, 8, 11]);
+const firstPlayer = dealerFunction(1, 1);
+console.log(firstPlayer());
+console.log(firstPlayer());
+console.log(firstPlayer());
+console.log(firstPlayer());
+console.log(firstPlayer());
+console.log(firstPlayer());
+console.log(firstPlayer());
+console.log(firstPlayer());
+console.log("Second Player");
+const secondPlayer = dealerFunction(2, 4);
+console.log(secondPlayer());
+console.log(secondPlayer());
+console.log(secondPlayer());
+console.log(secondPlayer());
+console.log(secondPlayer());
+console.log("Third Player");
+const thirdPlayer = dealerFunction(1, 2);
+console.log(thirdPlayer());
+console.log(thirdPlayer());
+console.log(thirdPlayer());
+console.log(thirdPlayer());
+console.log(thirdPlayer());
+console.log(thirdPlayer());
