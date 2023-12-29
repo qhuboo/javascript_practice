@@ -101,3 +101,6 @@ function delayCounter(target, wait) {
 
 const newFunc = delayCounter(8, 2000);
 newFunc();
+
+// 8. Write a function, *promised*, that takes in a value. This function will return a promise that will resolve after 2 seconds.
+// Hint: Take a look at the Promise object docs on MDN
