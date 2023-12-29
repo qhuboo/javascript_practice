@@ -53,14 +53,51 @@
 // helloGoodbye();
 
 // 4. Create a function *brokenRecord* that console logs *hi again* every second. Use ctrl + c when you are satisfied that it is working.
-function brokenRecord() {
-  setInterval(() => console.log("hi again"), 1000);
-  setTimeout(() => console.log("HAAAAAAAA"), 3000);
-  let sum = [];
-  for (let i = 0; i < 100000000; i++) {
-    sum.push(i);
-  }
-  console.log("Me first!!");
+// function brokenRecord() {
+//   setInterval(() => console.log("hi again"), 1000);
+// }
+
+// brokenRecord();
+
+// 5. Create a function *limitedRepeater* that console logs *hi for now* every second, but only for 5 seconds. Research how to use *clearInterval* if you are not sure
+// how to do this.
+// function limitedRepeater() {
+//   return setInterval(() => console.log("hi for now"), 1000);
+// }
+
+// const someId = limitedRepeater();
+// setTimeout(() => clearInterval(someId), 5000);
+
+// 6. Write a function called *everyXsecsForYsecs* that will accept three arguments: a function *func*, a number *interval*, and another number *duration*.
+// *everyXsecsForYsecs* will execute the given function every *interval* number of milliseconds, but then automatically stop after *duration* millseconds.
+// Then pass the below *sayHi* function into an invocation of *everyXsecsForYsecs* with 1000ms interval time and 5000ms duration time.
+// function everyXsecsForYsecs(func, interval, duration) {
+//   const someId = setInterval(func, interval);
+//   setTimeout(() => clearInterval(someId), duration);
+// }
+
+// function sayHi() {
+//   console.log("hi");
+// }
+
+// everyXsecsForYsecs(sayHi, 1000, 5000);
+
+// 7. Write a function *delayCounter* that accepts a number(called 'target') as the first argument and a number of milliseconds (called 'wait') as the second argument, and
+// returns a function.
+// When the returned function is invoked, it should log to the console all of the numbers between 1 and the target number, spaced apart by 'wait' milliseconds.
+function delayCounter(target, wait) {
+  let counter = 1;
+  return function () {
+    let someId = setInterval(() => {
+      if (counter <= target) {
+        console.log(counter);
+        counter++;
+      } else {
+        clearInterval(someId);
+      }
+    }, wait);
+  };
 }
 
-brokenRecord();
+const newFunc = delayCounter(8, 2000);
+newFunc();
