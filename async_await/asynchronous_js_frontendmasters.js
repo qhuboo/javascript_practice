@@ -85,22 +85,29 @@
 // 7. Write a function *delayCounter* that accepts a number(called 'target') as the first argument and a number of milliseconds (called 'wait') as the second argument, and
 // returns a function.
 // When the returned function is invoked, it should log to the console all of the numbers between 1 and the target number, spaced apart by 'wait' milliseconds.
-function delayCounter(target, wait) {
-  let counter = 1;
-  return function () {
-    let someId = setInterval(() => {
-      if (counter <= target) {
-        console.log(counter);
-        counter++;
-      } else {
-        clearInterval(someId);
-      }
-    }, wait);
-  };
-}
+// function delayCounter(target, wait) {
+//   let counter = 1;
+//   return function () {
+//     let someId = setInterval(() => {
+//       if (counter <= target) {
+//         console.log(counter);
+//         counter++;
+//       } else {
+//         clearInterval(someId);
+//       }
+//     }, wait);
+//   };
+// }
 
-const newFunc = delayCounter(8, 2000);
-newFunc();
+// const newFunc = delayCounter(8, 2000);
+// newFunc();
 
 // 8. Write a function, *promised*, that takes in a value. This function will return a promise that will resolve after 2 seconds.
 // Hint: Take a look at the Promise object docs on MDN
+function promised(input) {
+  return new Promise((resolve) => {
+    setTimeout(resolve(input), 2000);
+  });
+}
+
+console.log(promised("Hello"));
