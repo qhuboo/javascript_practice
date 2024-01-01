@@ -105,9 +105,9 @@
 // 8. Write a function, *promised*, that takes in a value. This function will return a promise that will resolve after 2 seconds.
 // Hint: Take a look at the Promise object docs on MDN
 function promised(input) {
-  return new Promise((resolve) => {
-    setTimeout(resolve(input), 2000);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(input), 2000);
   });
 }
 
-console.log(promised("Hello"));
+promised(2).then((result) => console.log(result));
